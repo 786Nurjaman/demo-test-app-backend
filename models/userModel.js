@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    email_address:{
+    email:{
         type: String,
         unique: [true,'Please provide unique email address'],
         lowercase: true,
