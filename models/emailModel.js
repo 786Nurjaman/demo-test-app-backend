@@ -17,7 +17,7 @@ const emailSchema = new mongoose.Schema({
     },
     email:{
         type: String,
-        unique: [true,'Please provide unique email address'],
+        // unique: [true,'Please provide unique email address'],
         lowercase: true,
         validate:{
             validator: (v)=>{
