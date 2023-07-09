@@ -1,5 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
+const cluster = require('cluster')
+const os = require('os')
 const createError = require('http-errors')
 require('dotenv').config()
 const xssClean = require('xss-clean')
@@ -12,10 +14,7 @@ const connectDB = require("./config/db")
 const { errorResponse } = require('./util/responseController')
 const app=express()
 
-
-
-
-
+const numCpu = os.cpus().length
 
 const rateLimiter = rateLimit({
     windowMs: 1*  60 * 1000, //1 minute
@@ -47,7 +46,18 @@ app.use((err, req, res, next)=>{
    return errorResponse(res, {statusCode: err.status, message: err.message})
 })
 
-app.listen(port, async()=>{
-    console.log(`server is listening at http://localhost:${port}`)
-    await connectDB()
-})
+
+if(cluster.isMaster){
+    connectDB()
+    for(let i=0; i<numCpu; i++){
+        cluster.fork()
+    }
+    cluster.on('exit',(worker, code, signal)=>{
+        console.log(`worker ${worker.process.pid} died`)
+        cluster.fork()
+    })
+}else{
+    app.listen(port,()=>{
+        console.log(`Process id = ${process.pid}. Server is listening at http://localhost:${port}`)
+    })
+}
