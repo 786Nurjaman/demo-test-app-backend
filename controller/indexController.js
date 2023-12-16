@@ -6,20 +6,24 @@ const {successResponse}=require('../util/responseController')
 
 const sendEmail=async(req, res, next)=>{
     try {
-        const {name, subject, email, message} = req.body
-        const newEmail = new Email({name, subject, email, message})
-        await newEmail.save()
-        //prepare email
+        const {name, email, contact, country, message} = req.body
+        const emailSubject = `${name}-Requested for resolve query`
         const emailData = {
             email: email,
-            subject: `${subject}`,
+            subject: `${emailSubject}`,
             html: `
                 <p>My Name is ${name}.</p>
+                <p>Contact:-${contact}</p>
+                <p>Country:-${country}</p>
                 <p>${message}</p>
             `
         }
         try {
-            await sendEmailWithNodemailer(emailData)
+         const emailRes =  await sendEmailWithNodemailer(emailData)
+         if(emailRes){
+            const newEmail = new Email({ name, email, contact, country, message, subject: emailSubject})
+            await newEmail.save()
+         }
         } catch (emailError) {
             console.log(emailError)
             next(createError(500,'Failed to send verification email'))

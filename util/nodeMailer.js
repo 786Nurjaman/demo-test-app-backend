@@ -21,6 +21,9 @@ const sendEmailWithNodemailer = async (emailData)=>{
     }
    const info = await transpoter.sendMail( mailOptions )
    console.log('Message sent: %s', info.response)
+   if(info.response){
+        return true
+   }
    } catch (error) {
     console.error('Error occured while sending email: ', error)
     throw error

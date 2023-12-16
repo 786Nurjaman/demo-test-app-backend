@@ -8,12 +8,12 @@ const emailSchema = new mongoose.Schema({
         maxlength:[30, 'name can be max 30 character'],
         minlength:[3, 'name can be min 3 character']
     },
-    subject:{  type: String,
-        required: [true, "subject is required"],
+    country:{
+        type: String,
+        required: [true, "country is required"],
         trim: true,
-        maxlength:[30, 'subject can be max 30 character'],
-        minlength:[3, 'subject can be min 3 character']
-
+        maxlength:[30, 'country can be max 30 character'],
+        minlength:[5, 'country can be min 5 character']
     },
     email:{
         type: String,
@@ -27,9 +27,23 @@ const emailSchema = new mongoose.Schema({
             }
         }
     },
+    contact:{
+        type: String,
+        required: [true, 'phone number is required'],
+        trim: true,
+        maxlength:[13, 'name can be max 13 character'],
+        minlength:[10, 'name can be min 3 character']
+    },
     message:{ type: String,
         required: [true, "message is required"]
-    }
+    },
+    subject:{  
+        type: String,
+        required: [true, "subject is required"],
+        trim: true,
+        maxlength:[100, 'subject can be max 100 character'],
+        minlength:[3, 'subject can be min 3 character']
+    },
 },{timestamps: true})
 
 const Email = mongoose.model('email', emailSchema)

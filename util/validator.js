@@ -9,12 +9,18 @@ const emailValidator=[
         .withMessage('name should be min 3 character and max 20 character')
         .isString()
         .withMessage('name must be a string'),
-    body('subject')
+    body('country')
         .trim()
         .notEmpty()
-        .withMessage('subject is required')
+        .withMessage('country is required')
         .isString()
-        .withMessage('subject must be a string'),
+        .withMessage('country must be a string'),
+    body('contact')
+        .trim()
+        .notEmpty()
+        .withMessage('contact is required')
+        .isString()
+        .withMessage('contact must be a string'),
     body('email')
         .trim()
         .notEmpty()
