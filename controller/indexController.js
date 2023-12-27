@@ -18,23 +18,19 @@ const sendEmail=async(req, res, next)=>{
                 <p>${message}</p>
             `
         }
-        try {
          const emailRes =  await sendEmailWithNodemailer(emailData)
          if(emailRes){
             const newEmail = new Email({ name, email, contact, country, message, subject: emailSubject})
             await newEmail.save()
-         }
-        } catch (emailError) {
-            console.log(emailError)
+            return successResponse(res,{
+                statusCode : 200, 
+                message:`Email sent`,
+                payload: {}
+            })
+         }else{
             next(createError(500,'Failed to send verification email'))
             return
-        }
-        return successResponse(res,{
-            statusCode : 200, 
-            message:`Email sent`,
-            payload: {}
-        })
-
+         }
     } catch (error) {
         next(error)
     }

@@ -6,8 +6,9 @@ const runValidation=async(req,res,next)=>{
         const errors = validationResult(req)
         if(!errors.isEmpty()){
             errorResponse(res,{statusCode: 422, message:errors.array()[0].msg})
+        }else{
+            return next()
         }
-        return next()
     } catch (error) {
         next(error)
     }
