@@ -32,7 +32,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/test',(req, res)=>{
     return res.status(200).json({
         success: true,
-        message:"server is runing successfully"
+        message:"server is running successfully"
     })
 })
 app.use('/api/v1',router)
