@@ -8,8 +8,8 @@ const transpoter = nodemailer.createTransport({
     auth: {
         // user: 'nurjamanshekh.wikiance@gmail.com',
         // pass: 'bzyylbiukyabimnb'
-        user: 'utsabdas211@gmail.com',
-        pass: 'qjafbinsprwxgssf'
+        user: 'techiies39@gmail.com',
+        pass: 'zwpttmxfgbkubyhg'
     }
 })
 

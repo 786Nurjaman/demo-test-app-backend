@@ -9,11 +9,12 @@ const sendEmail=async(req, res, next)=>{
         const {name, email, contact, country, message} = req.body
         const emailSubject = `${name}-Requested for resolve query`
         const emailData = {
-            email: email,
+            email: "sales.yourscatterbrain@gmail.com",
             subject: `${emailSubject}`,
             html: `
                 <p>My Name is ${name}.</p>
                 <p>Contact:-${contact}</p>
+                <p>Email:- ${email}
                 <p>Country:-${country}</p>
                 <p>${message}</p>
             `
