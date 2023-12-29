@@ -16,7 +16,8 @@ const transpoter = nodemailer.createTransport({
 const sendEmailWithNodemailer = async (emailData)=>{
    try {
     const mailOptions = {
-        from: 'nurjamanshekh.wikiance@gmail.com',
+        // from: 'nurjamanshekh.wikiance@gmail.com',
+        from: 'techiies39@gmail.com',
         to: emailData.email,
         subject: emailData.subject,
         html: emailData.html
