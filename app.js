@@ -11,6 +11,7 @@ const port = process.env.PORT || 6001
 const router = require('./router/indexRouter')
 const connectDB = require("./config/db")
 const { errorResponse } = require('./util/responseController')
+const nodeJob = require('./job/callApi')
 const app=express()
 
 // const numCpu = os.cpus().length
@@ -61,5 +62,6 @@ app.use((err, req, res, next)=>{
 // }
 app.listen(port,async()=>{
     await connectDB()
+    nodeJob
     console.log(`Server is listening at http://localhost:${port}`)
 })
